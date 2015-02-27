@@ -1,13 +1,7 @@
 from __future__ import print_function
 import os
-from cloudmesh_common.tables import print_format_dict, two_column_table
-
 from cmd3.console import Console
 from cmd3.shell import command
-import json
-from cloudmesh.user.cm_user import cm_user
-from cloudmesh.config.cm_config import cm_config
-from pprint import pprint
 
 from cmd3_example.HostStatus import HostStatus
 
