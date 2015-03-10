@@ -18,7 +18,7 @@ class cm_shell_hoststatus:
           Usage:
               hoststatus NAME 
 
-          tests via pingif the host ith the give NAME is reacahble
+          tests via ping if the host ith the give NAME is reachable
 
           Arguments:
 
@@ -43,7 +43,6 @@ class cm_shell_hoststatus:
                 Console.error("machine " + host + " not reachable. error.")
             
             
-        # shell_command_open_ssh(arguments)
         pass
 
 if __name__ == '__main__':

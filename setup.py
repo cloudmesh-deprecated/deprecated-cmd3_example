@@ -2,34 +2,36 @@
 
 version = "1.0"
 
-#from distutils.core import setup
+
+requirements = [
+        'future',
+        'sh',
+        'docopt',
+        'pyaml',
+        'simplejson',
+        'nose',
+        'python-hostlist',
+        'prettytable',
+        'pytimeparse',
+    ]
 
 from setuptools import setup, find_packages
 from setuptools.command.install import install
 import glob
 import os
-from cloudmesh_base.util import banner
+
+try:
+    from cloudmesh_base.util import banner
+except:
+    os.system("pip install cloudmesh_base")
+
+
 
 banner("Installing Cloudmesh Base")
 
 home = os.path.expanduser("~")
 
-#
-# MANAGE VERSION NUMBER
-#
-
-#
-# read
-#
-
-
-with open("cmd3_example/__init__.py", "r") as f:
-    content = f.read()
-
-if content != 'version = "{0}"'.format(version):
-    banner("Updating version to {0}".format(version))
-    with open("cmd3_example/__init__.py", "w") as text_file:
-        text_file.write('version="%s"' % version)
+auto_create_version("cmd3_example", version)
 
 
 class UploadToPypi(install):
@@ -97,6 +99,7 @@ setup(
         'Environment :: OpenStack',
     ],
     packages=find_packages(),
+    install_requires=requirements,
     cmdclass={
         'install': InstallBase,
         'requirements': InstallRequirements,
