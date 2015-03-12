@@ -25,6 +25,11 @@ try:
 except:
     os.system("pip install cloudmesh_base")
 
+from cloudmesh_base.util import banner
+from cloudmesh_base.util import path_expand
+from cloudmesh_base.Shell import Shell
+from cloudmesh_base.util import auto_create_version
+from cloudmesh_base.util import auto_create_requirements
 
 
 banner("Installing Cloudmesh Base")
@@ -32,7 +37,7 @@ banner("Installing Cloudmesh Base")
 home = os.path.expanduser("~")
 
 auto_create_version("cmd3_example", version)
-
+auto_create_requirements(requirements)
 
 class UploadToPypi(install):
     """Upload the package to pypi."""
