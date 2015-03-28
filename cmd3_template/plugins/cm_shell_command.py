@@ -3,20 +3,21 @@ import os
 from cmd3.console import Console
 from cmd3.shell import command
 
-from cmd3_example.HostStatus import HostStatus
+from {package}.command_{command} import command_{command}
 
-class cm_shell_hoststatus:
 
-    def activate_cm_shell_hoststatus(self):
-        self.register_command_topic('mycommands', 'hoststatus')
+class cm_shell_{command}:
+
+    def activate_cm_shell_{command}(self):
+        self.register_command_topic('{topic}', '{command}')
 
     @command
-    def do_hoststatus(self, args, arguments):
+    def do_{command}(self, args, arguments):
         """
         ::
 
           Usage:
-              hoststatus NAME 
+              {command} NAME 
 
           tests via ping if the host ith the give NAME is reachable
 
@@ -36,16 +37,14 @@ class cm_shell_hoststatus:
         else:
             host = arguments["NAME"]
             Console.info("trying to reach {0}".format(host))
-            status = HostStatus.status(host)
+            status = command_{command}.status(host)
             if status:
                 Console.info("machine " + host + " has been found. ok.")
             else:
                 Console.error("machine " + host + " not reachable. error.")
-            
-            
         pass
 
 if __name__ == '__main__':
-    command = cm_shell_hoststatus()
-    command.do_hoststatus("iu.edu")
-    command.do_hoststatus("iu.edu-wrong")
+    command = cm_shell_{command}()
+    command.do_{command}("iu.edu")
+    command.do_{command}("iu.edu-wrong")

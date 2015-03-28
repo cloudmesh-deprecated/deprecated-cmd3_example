@@ -4,21 +4,23 @@ version = "1.0"
 
 
 requirements = [
-        'future',
-        'sh',
-        'docopt',
-        'pyaml',
-        'simplejson',
-        'nose',
-        'python-hostlist',
-        'prettytable',
-        'pytimeparse',
+    'future',
+    'sh',
+    'docopt',
+    'pyaml',
+    'simplejson',
+    'nose',
+    'python-hostlist',
+    'prettytable',
+    'pytimeparse',
     ]
 
 from setuptools import setup, find_packages
 from setuptools.command.install import install
 import glob
 import os
+
+package_name = "{package}"
 
 try:
     from cloudmesh_base.util import banner
@@ -32,12 +34,13 @@ from cloudmesh_base.util import auto_create_version
 from cloudmesh_base.util import auto_create_requirements
 
 
-banner("Installing Cloudmesh Base")
+banner("Installing Cloudmesh " + package_name)
 
 home = os.path.expanduser("~")
 
-auto_create_version("cmd3_example", version)
+auto_create_version(package_name, version)
 auto_create_requirements(requirements)
+
 
 class UploadToPypi(install):
     """Upload the package to pypi."""
@@ -46,6 +49,7 @@ class UploadToPypi(install):
         os.system("python setup.py install")                
         banner("Build Distribution")
         os.system("python setup.py sdist --format=bztar,zip upload")        
+
 
 class RegisterWithPypi(install):
     """Upload the package to pypi."""
@@ -57,25 +61,27 @@ class RegisterWithPypi(install):
 class InstallBase(install):
     """Install the package."""
     def run(self):
-        banner("Install Cloudmesh Base")
+        banner("Installing Cloudmesh " + package_name)
         install.run(self)
+
 
 class InstallRequirements(install):
     """Install the requirements."""
     def run(self):
-        banner("Install Cloudmesh Base Requirements")
+        banner("Installing Requirements for Cloudmesh " + package_name)
         os.system("pip install -r requirements.txt")
         
+
 class InstallAll(install):
     """Install requirements and the package."""
     def run(self):
-        banner("Install Cloudmesh Base Requirements")
+        banner("Installing Requirements for Cloudmesh " + package_name)
         os.system("pip install -r requirements.txt")
-        banner("Install Cloudmesh Base")        
+        banner("Installing Cloudmesh " + package_name)
         install.run(self)
         
 setup(
-    name='cmd3_example',
+    name='MODULE',
     version=version,
     description='A set of simple base functions and classes useful for cloudmesh and other programs',
     # description-file =
